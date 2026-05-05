@@ -1,6 +1,5 @@
 plugins {
     id "java"
-    id "com.gradleup.shadow" version "9.4.1"
 }
 
 base {
@@ -16,7 +15,6 @@ java {
 dependencies {
     compileOnly "io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT"
     compileOnly "me.clip:placeholderapi:2.12.2"
-    implementation "org.xerial:sqlite-jdbc:3.53.0.0"
 }
 
 def pluginVersion = version.toString()
@@ -31,12 +29,4 @@ tasks.processResources {
     filesMatching("plugin.yml") {
         expand("version": pluginVersion)
     }
-}
-
-tasks.shadowJar {
-    archiveClassifier = ""
-}
-
-tasks.build {
-    dependsOn tasks.shadowJar
 }

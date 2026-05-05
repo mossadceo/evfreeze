@@ -10,11 +10,20 @@ A Java plugin for Paper/Folia that allows freezing players.
 - Blocks movement, commands, block placing/breaking, inventory access, interactions, and other actions.
 - Chat remains available.
 - MiniMessage support for messages and titles.
-- SQLite database
+- Stores frozen players in `data.yml`.
 - Paper and Folia support without NMS.
 - PlaceholderAPI: `%evfreeze_frozen%` returns the value of `placeholders.frozen` from `messages.yml` if the player is frozen, otherwise an empty string.
 
-All messages, titles, and sounds can be changed.
+## Configuration
+
+After the first launch, EVFreeze creates:
+
+```text
+plugins/EVFreeze/messages.yml
+plugins/EVFreeze/data.yml
+```
+
+Messages, titles, sounds, localization, and PlaceholderAPI responses can be changed in `messages.yml`.
 
 ## Permissions
 
@@ -27,3 +36,10 @@ All messages, titles, and sounds can be changed.
 
 ```bash
 ./gradlew build
+```
+
+The jar will be created at:
+
+```text
+app/build/libs/EVFreeze-1.0.0.jar
+```

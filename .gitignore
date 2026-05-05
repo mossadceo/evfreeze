@@ -8,6 +8,7 @@ out/
 
 # Runtime plugin data
 plugins/
+data.yml
 *.db
 *.db-shm
 *.db-wal

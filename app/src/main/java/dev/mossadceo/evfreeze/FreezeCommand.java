@@ -7,7 +7,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -55,14 +54,8 @@ public final class FreezeCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        try {
-            plugin.freeze(target);
-            plugin.messages().send(sender, "freeze-success", plugin.messages().player(target.getName()));
-        } catch (SQLException exception) {
-            plugin.getLogger().severe("Failed to freeze " + target.getName());
-            exception.printStackTrace();
-            sender.sendMessage("Database error. Check console.");
-        }
+        plugin.freeze(target);
+        plugin.messages().send(sender, "freeze-success", plugin.messages().player(target.getName()));
         return true;
     }
 
@@ -98,14 +91,8 @@ public final class FreezeCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        try {
-            plugin.unfreeze(frozenPlayer);
-            plugin.messages().send(sender, "unfreeze-success", plugin.messages().player(frozenPlayer.name()));
-        } catch (SQLException exception) {
-            plugin.getLogger().severe("Failed to unfreeze " + frozenPlayer.name());
-            exception.printStackTrace();
-            sender.sendMessage("Database error. Check console.");
-        }
+        plugin.unfreeze(frozenPlayer);
+        plugin.messages().send(sender, "unfreeze-success", plugin.messages().player(frozenPlayer.name()));
         return true;
     }
 

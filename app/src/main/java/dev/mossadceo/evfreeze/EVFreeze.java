@@ -5,7 +5,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.sql.SQLException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,7 +18,7 @@ public final class EVFreeze extends JavaPlugin {
     private final Map<UUID, FrozenPlayer> frozenPlayers = new ConcurrentHashMap<>();
     private final Map<UUID, ScheduledTask> effectTasks = new ConcurrentHashMap<>();
     private MessageConfig messages;
-    private FreezeDatabase database;
+    private FreezeStorage storage;
 
     @Override
     public void onEnable() {
@@ -27,15 +26,8 @@ public final class EVFreeze extends JavaPlugin {
         messages = new MessageConfig(this);
         messages.reload();
 
-        try {
-            database = new FreezeDatabase(this);
-            frozenPlayers.putAll(database.loadFrozenPlayers());
-        } catch (SQLException exception) {
-            getLogger().severe("Failed to initialize SQLite database.");
-            exception.printStackTrace();
-            getServer().getPluginManager().disablePlugin(this);
-            return;
-        }
+        storage = new FreezeStorage(this);
+        frozenPlayers.putAll(storage.loadFrozenPlayers());
 
         FreezeCommand command = new FreezeCommand(this);
         Objects.requireNonNull(getCommand("freeze")).setExecutor(command);
@@ -60,8 +52,8 @@ public final class EVFreeze extends JavaPlugin {
     public void onDisable() {
         effectTasks.values().forEach(ScheduledTask::cancel);
         effectTasks.clear();
-        if (database != null) {
-            database.close();
+        if (storage != null) {
+            storage.saveFrozenPlayers(frozenPlayers.values());
         }
     }
 
@@ -88,14 +80,14 @@ public final class EVFreeze extends JavaPlugin {
         return null;
     }
 
-    public boolean freeze(Player player) throws SQLException {
+    public boolean freeze(Player player) {
         if (isFrozen(player.getUniqueId())) {
             return false;
         }
 
         FrozenPlayer frozenPlayer = new FrozenPlayer(player.getUniqueId(), player.getName(), System.currentTimeMillis());
-        database.freeze(frozenPlayer);
         frozenPlayers.put(player.getUniqueId(), frozenPlayer);
+        storage.saveFrozenPlayers(frozenPlayers.values());
         runFor(player, () -> {
             applyFreezeEffect(player);
             messages.showTitle(player, "freeze");
@@ -104,13 +96,13 @@ public final class EVFreeze extends JavaPlugin {
         return true;
     }
 
-    public boolean unfreeze(FrozenPlayer frozenPlayer) throws SQLException {
+    public boolean unfreeze(FrozenPlayer frozenPlayer) {
         if (frozenPlayer == null || !isFrozen(frozenPlayer.uuid())) {
             return false;
         }
 
-        database.unfreeze(frozenPlayer.uuid());
         frozenPlayers.remove(frozenPlayer.uuid());
+        storage.saveFrozenPlayers(frozenPlayers.values());
         stopFreezeEffect(frozenPlayer.uuid());
 
         Player player = Bukkit.getPlayer(frozenPlayer.uuid());
