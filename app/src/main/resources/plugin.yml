@@ -1,0 +1,36 @@
+name: EVFreeze
+version: '${version}'
+main: dev.mossadceo.evfreeze.EVFreeze
+api-version: '1.21'
+folia-supported: true
+author: mossadceo
+description: Simple Paper/Folia player freeze plugin.
+softdepend:
+  - PlaceholderAPI
+commands:
+  freeze:
+    description: Freeze a player.
+    usage: /freeze <player>
+  unfreeze:
+    description: Unfreeze a player.
+    usage: /unfreeze <player>
+  freezelist:
+    description: List frozen players.
+    usage: /freezelist
+permissions:
+  evfreeze.admin:
+    description: Gives access to all EVFreeze commands.
+    default: op
+    children:
+      evfreeze.freeze: true
+      evfreeze.unfreeze: true
+      evfreeze.list: true
+  evfreeze.freeze:
+    description: Allows freezing players.
+    default: op
+  evfreeze.unfreeze:
+    description: Allows unfreezing players.
+    default: op
+  evfreeze.list:
+    description: Allows viewing frozen players.
+    default: op

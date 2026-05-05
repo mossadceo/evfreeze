@@ -1,0 +1,73 @@
+# Selects which language section EVFreeze uses. Available values: ru, en.
+localization: ru
+
+locales:
+  ru:
+    messages:
+      no-permission: "<red>У вас нет прав."
+      usage-freeze: "<gray>Использование: <white>/freeze <player>"
+      usage-unfreeze: "<gray>Использование: <white>/unfreeze <player>"
+      usage-freezelist: "<gray>Использование: <white>/freezelist"
+      player-not-found: "<red>Игрок <white><player></white> не найден или не онлайн."
+      player-already-frozen: "<yellow>Игрок <white><player></white> уже заморожен."
+      player-not-frozen: "<yellow>Игрок <white><player></white> не заморожен."
+      freeze-success: "<green>Игрок <white><player></white> заморожен."
+      unfreeze-success: "<green>Игрок <white><player></white> разморожен."
+      frozen-command-blocked: "<red>Вы заморожены. Команды недоступны."
+      list-empty: "<gray>Сейчас нет замороженных игроков."
+      list-header: "<aqua>Замороженные игроки:"
+      list-entry: "<gray>- <white><player></white> <dark_gray>(<time>)"
+
+    placeholders:
+      frozen: "❄︎"
+
+    titles:
+      freeze:
+        title: "<gradient:#7dd3fc:#ffffff>ЗАМОРОЖЕН</gradient>"
+        subtitle: "<gray>Вы можете писать только в чат"
+        fade-in: 10
+        stay: 60
+        fade-out: 20
+        sound: "entity.player.hurt_freeze"
+      unfreeze:
+        title: "<green>РАЗМОРОЖЕН</green>"
+        subtitle: "<gray>Вы снова можете двигаться"
+        fade-in: 10
+        stay: 50
+        fade-out: 20
+        sound: "block.glass.break"
+
+  en:
+    messages:
+      no-permission: "<red>You do not have permission."
+      usage-freeze: "<gray>Usage: <white>/freeze <player>"
+      usage-unfreeze: "<gray>Usage: <white>/unfreeze <player>"
+      usage-freezelist: "<gray>Usage: <white>/freezelist"
+      player-not-found: "<red>Player <white><player></white> was not found or is not online."
+      player-already-frozen: "<yellow>Player <white><player></white> is already frozen."
+      player-not-frozen: "<yellow>Player <white><player></white> is not frozen."
+      freeze-success: "<green>Player <white><player></white> has been frozen."
+      unfreeze-success: "<green>Player <white><player></white> has been unfrozen."
+      frozen-command-blocked: "<red>You are frozen. Commands are disabled."
+      list-empty: "<gray>There are no frozen players right now."
+      list-header: "<aqua>Frozen players:"
+      list-entry: "<gray>- <white><player></white> <dark_gray>(<time>)"
+
+    placeholders:
+      frozen: "❄︎"
+
+    titles:
+      freeze:
+        title: "<gradient:#7dd3fc:#ffffff>FROZEN</gradient>"
+        subtitle: "<gray>You can only use chat"
+        fade-in: 10
+        stay: 60
+        fade-out: 20
+        sound: "entity.player.hurt_freeze"
+      unfreeze:
+        title: "<green>UNFROZEN</green>"
+        subtitle: "<gray>You can move again"
+        fade-in: 10
+        stay: 50
+        fade-out: 20
+        sound: "block.glass.break"

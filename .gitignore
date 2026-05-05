@@ -1,0 +1,17 @@
+.gradle/
+build/
+app/build/
+out/
+*.iml
+.idea/
+.vscode/
+
+# Runtime plugin data
+plugins/
+*.db
+*.db-shm
+*.db-wal
+
+# Java
+hs_err_pid*
+replay_pid*

@@ -1,0 +1,4 @@
+allprojects {
+    group = "dev.mossadceo"
+    version = "1.0.0"
+}
